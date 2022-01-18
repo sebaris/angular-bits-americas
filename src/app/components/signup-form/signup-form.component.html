@@ -1,0 +1,112 @@
+
+
+<h3 class="card-title">Signup</h3>
+<form #signupForm="ngForm" (ngSubmit)="submit(signupForm)" novalidate autocomplete="off">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" 
+               class="form-control"
+               name="username" 
+               ngModel
+               #username="ngModel"
+               required >
+        <div class="form-error form-username-error"
+            *ngIf="!username?.valid && (username?.dirty || username?.touched)" >
+            <div *ngIf="username.errors?.required"> This username is not available. </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" 
+               name="email" 
+               class="form-control" 
+               ngModel
+               #email="ngModel" 
+               required 
+               email >
+        <div class="form-error form-email-error"
+            *ngIf="!email?.valid && (email?.dirty || email?.touched)">
+            <div *ngIf="email.errors?.required"> This email is not available. </div>
+            <div *ngIf="email.errors?.email"> This is not correct email. </div>            
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" 
+               name="password" 
+               class="form-control"
+               ngModel
+               #password="ngModel" 
+               required
+               pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$">
+        <div class="form-error form-password-error"
+            *ngIf="!password?.valid && (password?.dirty || password?.touched)">
+            <div *ngIf="password.errors?.required"> Password is not available. </div>
+            <div *ngIf="password.errors?.pattern"> Password should have at least 8 characters including one uppercase, one lowercase and one number. </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password_match">Repeat Password</label>
+        <input type="password" 
+               name="password_match" 
+               class="form-control"
+               ngModel
+               #password_match="ngModel"
+               required
+               pattern="{{ password.value }}">
+        <div class="form-error form-password_match-error"
+            *ngIf="!password_match?.valid && (password_match?.dirty || password_match?.touched)">
+            <div *ngIf="password_match.errors?.required"> Password match is not available. </div>
+            <div *ngIf="password_match.errors?.pattern">Passwords should match</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="phoneNumer">Phone Number</label>
+        <input class="form-control" 
+               name="phoneNumber" 
+               type="text" 
+               ngModel
+               #phoneNumber="ngModel"
+               required
+               pattern="^\([1-9]{1}[0-9]{2}\)\s[0-9]{3}-[0-9]{4}$">
+        <div class="form-error form-phoneNumber-error"
+            *ngIf="!phoneNumber?.valid && (phoneNumber?.dirty || phoneNumber?.touched)">
+            <div *ngIf="phoneNumber.errors?.required"> Phone number is not available. </div>
+            <div *ngIf="phoneNumber.errors?.pattern">This phone number is invalid. Valid format is (999) 999-9999</div>            
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="country">Country</label>
+        <select class="form-control" 
+                name="country" 
+                ngModel
+                #country="ngModel"
+                required 
+                (change)="onSelectCountry($event)">
+            <option value="">--Select Country--</option>
+            <option *ngFor="let country of countries" [value]="country.id">{{ country.name }}</option>
+        </select>
+        <div class="form-error form-country-error"
+            *ngIf="!country?.valid && (country?.dirty || country?.touched)">
+            <div *ngIf="country.errors?.required"> This country is not available. </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="state">State</label>
+        <select class="form-control" 
+                name="state"
+                ngModel
+                #state="ngModel"
+                required>
+            <option value="">--Select State--</option>
+            <option *ngFor="let state of states" [value]="state.id">{{ state.name }}</option>
+        </select>
+        <div class="form-error form-state-error"
+            *ngIf="!state?.valid && (state?.dirty || state?.touched)">
+            <div *ngIf="state.errors?.required"> This state is not available. </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block" [disabled]="signupForm.invalid">Sign up</button>
+    </div>
+</form>
