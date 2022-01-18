@@ -1,5 +1,14 @@
 # SigunpForm
 
+Se soluciona prueba en Angular para el formulario de registro:
+
+- Se completa el flujo de formulario de registro configurando las rutas para el formulario principal y pagina de respuesta
+- Se cargan datos de los selectores de paises y estados optienen información desde el servicio.
+- Se hace dinámico y dependiente la selección del estado, según el país seleccionado.
+- Se hacen las validaciones de formulario exigidas (campos requeridos, cadena exigida para contraseña, contraseñas iguales y cadena exigida para teléfono).
+
+Lo siguiente es información cargada en el README, al iniciar el proyecto angular desde el CLI
+------------------------------------
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.1.
 
 ## Development server
